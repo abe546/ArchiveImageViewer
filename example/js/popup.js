@@ -1,34 +1,66 @@
 document.body.style.backgroundColor = "gray";
- 
+var count =0; 
+var imagesArray = document.getElementsByClassName("fileThumb"); 
+var first; 
 	
-	var $input = $('<input type="button" value="Open" id="b" />');
+	var $input = $('<input type="button" value="Start" id="b" />');
      $input.prependTo($("body"));
 	 
-	 $("#b").click(function(){ func() });
-	 $("#b").after("<div id=\"message\" ></div>"); 
-	 $("#message").after("<div id=\"imageView\" ></div>"); 
-	 
-function func()
-{
-	var view = document.getElementById("pc736680961"); 
-	window.location.hash = '#pc736680961';
-	
-	if(localStorage.getItem("in")=="null" || localStorage.getItem("in") == null )
+	 $("#b").click(function(){ 
+	 if(localStorage.getItem("in")=="null" || localStorage.getItem("in") == null )
 	{
+		  
 		localStorage.setItem("in",1); 
+		func();
 	}
 	else if(localStorage.getItem("in") == 1)
 	{
 		localStorage.setItem("in",0); 
 		
-		view.innerHTML=""; 
+		
 		$("#b").prop("value","open"); 
+		$(".myImage").hide(); 
+		
+		
+		
 		return;
 	}
 	else if(localStorage.getItem("in") == 0)
 	{
 		localStorage.setItem("in",1); 
+		func();
+	} });
+	 $("#b").after("<div id=\"message\" ></div>"); 
+	 $("#message").after("<div id=\"imageView\" ></div>"); 
+	 
+function func()
+{//NOT : Find way to get first image to be before the second one, instead of at bottom of page.
+ 
+	console.log("Count : "+count); 
+	
+	
+	
+	var elements = document.getElementsByTagName("article");
+	
+	console.log("Elements length : "+elements.length); 
+	
+    var id = elements[count].id;
+	
+	if(count==0)
+	{
+		first=elements[count+1].id; 
 	}
+	
+	var view = document.getElementById(id); 
+	
+	 
+	
+ 
+ 
+	
+	window.location.hash = ("#"+id);
+	
+	
 
 	
 	console.log("In func."); 
@@ -42,26 +74,39 @@ function func()
 	write.innerHTML +="<b>It works.!</b>";
 	/*Magic of the DOM*/
 	
-	var thread = document.getElementsByClassName("thread"); 
+	//4chan var thread = document.getElementsByClassName("fileThumb"); 
+	//Archive
 	
+	var thread = document.getElementsByClassName("post_file_filename")
  
- 
-		console.log("\n childNodes : "+thread[0].childNodes); 
-		console.log("\n Length of childNodes : "+thread[0].childNodes.length); 
-		
-		for(i=0; i<thread[0].childNodes.length;i++)
+        console.log("\n childNodes : "+thread[count]); 
+	 
+        /*for(i=0; i<thread.length;i++)
 		{
-			console.log("\n "+i+" : "+ thread[0].childNodes[i]);
-			console.log("\n Type : "+ thread[0].childNodes[i].type);
-		}
+			console.log("\n "+i+""+thread[i]);
+		}*/
 	 
 	
 	
 	/**/
 	
 	
-	view.innerHTML=""; 
-	view.innerHTML+="<center><img id=\"theImage\" src=\"http://i.4cdn.org/b/1498198439341.png\" ></center>";
+ 	 
+		$(".myImage").hide(); 
+	  
+	if(count==0)
+	{
+		var $zero= $("<center><img id=\"theImage"+count+"\" class=\"myImage\" src=\""+thread[count]+"\" ></center>");
+		$("#"+first).prepend($zero); 
+		
+	}
+	else
+	{
+	view.innerHTML+="<img id=\"theImage"+count+"\" class=\"myImage\" src=\""+thread[count]+"\" >";
+	}
+	
+
+	
 	
  
 	
@@ -71,6 +116,28 @@ $(document).keydown(function(e){
 	
  console.log(e.keyCode); 
  
+ //w== 87
+ //s== 83
+ 
+ if(e.keyCode==87)
+ {
+	 count++;
+	 
+	 func(); 
+	 return;
+ }
+ 
+ if(e.keyCode==83)
+ {
+	 if(count!=0)
+	 {
+		 count--;
+		 func(); 
+	 }
+	 
+	 return; 
+	 
+ }
 });
 
 
