@@ -1,28 +1,12 @@
 {
   "manifest_version": 2,
-
-  "name": "Getting started example",
-  "description": "This extension shows a Google Image search result for the current page",
-  "version": "1.0",
-
-  "browser_action": {
-    "default_icon": "icon.png",
-    "default_popup": "popup.html"
-  },
-  "background" : {
-    "scripts" : ["js/popup.js"]
-  },
+  "name": "my extension",
+  "version" : "0.01",
   "content_scripts": [
       {
-        "matches": ["https://boards.4chan.org/*"],
-        "js": ["jquery.js","js/popup.js"]          
+        "matches": ["http://boards.4chan.org/*"],
+        "js": ["js/jquery-3.2.1.min.js","js/popup.js"],  
+        "comment" : "BE VERY CAREFUL WITH PLACEMENT OF EXTERNAL FILES. JQUERY MUST BE LOADED BEFORE ANY OTHER JS SO IT MUST BE IN FIRST INDEX" 		 
       }
-  ],
-  "permissions": [
-    "activeTab",
-	"notifications",
- 
-	"tabs",
-    "https://ajax.googleapis.com/"
   ]
 }
