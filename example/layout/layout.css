@@ -1,25 +1,30 @@
 div.imageView{
-  opacity:    0.5; 
-  background: #000; 
-  width:      100%;
-  height:     100%; 
+   
+ 
+  width:      auto;
+  height:     650px; 
   
   z-index:    10;
   top:        0; 
   left:       0; 
   position:   fixed; /*Fixed will keep the image "stablilized"*/
+  bottom : 20px;
+  
 }
 
-input 
+#b,#w,#s
 {
 	position: fixed; 
+	z-index=9; 
+	display : inline-block;
 }
 
 .myImage
-{ width:      100%;
-  height:     100%; 
+{ width:      auto;
+  height:     650px; 
   max-width : auto;
   max-height : 650px; 
- 
+  bottom : 20px; 
+  
 	
 }
