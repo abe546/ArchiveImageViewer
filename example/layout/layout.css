@@ -3,20 +3,25 @@ div.imageView{
  
   width:      auto;
   height:     650px; 
-  
+  background : black;
   z-index:    10;
   top:        0; 
   left:       0; 
   position:   fixed; /*Fixed will keep the image "stablilized"*/
   bottom : 20px;
-  
+  outline: none;
+  left : 28px;
 }
 
-#b,#w,#s
+#b 
 {
 	position: fixed; 
-	z-index=9; 
-	display : inline-block;
+	z-index=-1; 
+	 
+	background : none;
+	outline: black;
+ 
+	 
 }
 
 .myImage
@@ -25,6 +30,23 @@ div.imageView{
   max-width : auto;
   max-height : 650px; 
   bottom : 20px; 
-  
-	
+  position:   fixed;
+	background : black;
+	outline: none;
+	 z-index:    10;
+	 left : 28px;
+	 
+}
+
+#w
+{
+	position: fixed;
+	z-index : 15;
+    
+	 top : 10%;
+	height : 80px;
+	width : 80px; 
+	left : 85%; 
+	background : none; 
+	 
 }

@@ -3,6 +3,8 @@ var count =0;
 var imagesArray = document.getElementsByClassName("fileThumb"); 
 var first; 
 var bumper=0; 
+var t;
+
 	
 	var $input = $('<p><input type="button" value="Start" id="b" > &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp &nbsp  <input type="button" value="forward - press \'w\'" id="w" > &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp  &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp  &nbsp <input type="button" value="backward - press \'s\'" id="s" > </p>');
      $input.prependTo($("body"));
@@ -10,52 +12,49 @@ var bumper=0;
 	 
 	 $("#w").hide(); 
 		$("#s").hide(); 
+		
+		 $("#b").after("<div id=\"message\" ></div>"); 
+	 $("#message").after("<div id=\"imageView\" ></div>"); 
 	 
+	 var image = document.getElementById("message"); 
+	 
+	 image.innerHTML +='<img src="https://web.njit.edu/~ic56/archive/w.png" class="next" id="w" >';
+	 
+	 
+	 console.log("Before pre load."); 
+preLoad(); 
+console.log("After pre load."); 
+$(".myImage").hide(); 
 	 
 	 $("#w").click(function()
 	 {
-		 count++;
+		count++;
+	 if(count>=t)
+	 {count=0;
+		 $("#b").prop("value","open"); 
+		$(".myImage").hide();
+		$("#w").hide(); 
+		$("#s").hide();
+		return;
+	 }
 	 bumper++; 
+	    $("#theImage"+(count-1)).hide(); 
+	document.getElementById("theImage"+(count-1)).volume=0.0; 
 	 func(); 
+	 return; 
 		 
 	 }
 	 );
 	 
 	 $("#s").click(function()
 	 {
-		  if(count!=0)
-	 {
-		 count--;
-		 bumper--; 
-		 
-		 var elements = document.getElementsByTagName("article");
-	
-	//console.log("Elements length : "+elements.length); 
-	
-	 
-	var className = elements[bumper].className;
-	
-	console.log("Current classname : "+className); 
-	//console.log("ClassName String length : "+className.length); 
-	
-	var issue = 0; 
-	console.log("Bumper before : "+bumper); 
-	console.log("Count : "+count); 
-	while(className.toString().substring(className.length-9,className.length) != "has_image")
-	{
-		bumper--;
-		className = elements[bumper].className;
-		
-		console.log("Current classname : "+className); 
-	    //console.log("ClassName String length : "+className.length); 
-		
-		issue=1; 
-		
-	}
-		 func(); 
+		$("#theImage"+(count)).hide(); 
+	document.getElementById("theImage"+(count)).volume=0.0; 
+	 goBack();
+     func();  
+	 return; 
 	 }
-		 
-	 }
+ 
 	 );
 	 
 	 $("#b").click(function(){ 
@@ -63,6 +62,7 @@ var bumper=0;
 	{
 		  
 		localStorage.setItem("in",1); 
+		$("#b").prop("value","esc"); 
 		$("#w").show();
 		$("#s").show(); 
 		func();
@@ -73,7 +73,7 @@ var bumper=0;
 		
 		
 		$("#b").prop("value","open"); 
-		$(".myImage").remove();
+		$(".myImage").hide();
 		$("#w").hide(); 
 		$("#s").hide(); 
 		
@@ -84,6 +84,7 @@ var bumper=0;
 	else if(localStorage.getItem("in") == 0)
 	{
 		localStorage.setItem("in",1); 
+		$("#b").prop("value","esc"); 
 			$("#w").show();
 		$("#s").show(); 
 		func();
@@ -91,137 +92,34 @@ var bumper=0;
 	
 	
 	
-	 $("#b").after("<div id=\"message\" ></div>"); 
-	 $("#message").after("<div id=\"imageView\" ></div>"); 
+	
 	 
 function func()
-{//NOT : Find way to get first image to be before the second one, instead of at bottom of page.
+{ 
+console.log("in Func"); 
+	var id = goForward(); 
  
-	 
-	
-	
-	
-	var elements = document.getElementsByTagName("article");
-	
-	//console.log("Elements length : "+elements.length); 
-	
-	 
-	var className = elements[bumper].className;
-	
-	console.log("Current classname : "+className); 
-	//console.log("ClassName String length : "+className.length); 
-	
-	var issue = 0; 
-	console.log("Bumper before : "+bumper); 
-	console.log("Count : "+count); 
-	while(className.toString().substring(className.length-9,className.length) != "has_image")
-	{
-		bumper++;
-		className = elements[bumper].className;
-		
-		console.log("Current classname : "+className); 
-	    //console.log("ClassName String length : "+className.length); 
-		
-		issue=1; 
-		
-	}
-	
-	 
-	console.log("Bumper after : "+bumper); 
-    var id = elements[bumper].id;
-	
-	
-	console.log(" DOM ID : "+id); 
-	
-	
-	if(count==0)
-	{
-		first=elements[bumper+1].id; 
-	}
-	
-	var view = document.getElementById(id); 
-	
-	 
-	
+	var view = document.getElementById("theImage"+count); 
+	console.log("theImage"+count); 
  
- 
-	
 	window.location.hash = ("#"+id);
-	
-	
-
-	
-	//console.log("In func."); 
-	
-	$("#b").prop("value","esc"); 
-	
-	var write = document.getElementById("message"); 
-	
-	 
-	write.innerHTML = ""; 
-	//write.innerHTML +="<b>It works.!</b>";
-	/*Magic of the DOM*/
-	
-	//4chan var thread = document.getElementsByClassName("fileThumb"); 
-	//Archive
-	
-	var thread = document.getElementsByClassName("post_file_filename")
  
-      //console.log("\n image url : "+thread[count]); 
-		var string = thread[count].toString();
-		//console.log(string.substring(0,5));
-		
-		if(string.substring(0,5) != "https")
-        {
-			string = "https"+string.substring(4,string.length);
-		}
-		var end = string.substring(string.length-4,string.length);
-		//console.log("End of string : "+end); 
-		//console.log("New string/url : "+string); 
-	 
-        /*for(i=0; i<thread.length;i++)
-		{
-			console.log("\n "+i+""+thread[i]);
-		}*/
-	 
 	
 	
-	/**/
-	
-	
+ 
+ 
  	 
-		$(".myImage").remove(); 
 		
-	if(end!="webm")  
-	{
-	if(count==0)
-	{
-		var $zero= $("<center><img id=\"theImage"+count+"\" class=\"myImage\" src=\""+string+"\" ></center>");
-		$("#"+first).prepend($zero); 
 		
-	}
-	else
-	{
-	//view.innerHTML+="<img id=\"theImage"+count+"\" class=\"myImage\" src=\""+thread[count]+"\" >";
-	$("#"+id).after("<img id=\"theImage"+count+"\" class=\"myImage\" src=\""+string+"\" >");
-	}
-	}
-	else
-	{
-		if(count==0)
-		{
-			var $zero= $("<video id=\"theImage"+count+"\" width=\"auto\" height=\"650\" class=\"myImage\" controls autoplay ><source src=\""+string+"\" type=\"video/webm\">");
-		$("#"+first).prepend($zero); 
-		}
-		else
-		{
-		$("#"+id).after("<video id=\"theImage"+count+"\" width=\"auto\" height=\"650\" class=\"myImage\" controls autoplay ><source src=\""+string+"\" type=\"video/webm\">");
-		}
-	}
+	 
+		view.style.display="block";
+		view.volume = 0.2; 
+		view.autoplay = true;
+ 
 	
 	
-	document.getElementById("theImage"+count).volume = 0.2; 
-
+	
+ 
 	
 	
  
@@ -230,7 +128,7 @@ function func()
 
 $(document).keydown(function(e){
 	
- console.log(e.keyCode); 
+  console.log(e.keyCode); 
  
  //w== 87
  //s== 83
@@ -239,56 +137,42 @@ $(document).keydown(function(e){
  if(e.keyCode==87)
  {
 	 count++;
+	 if(count>=t)
+	 {count=0;
+		 $("#b").prop("value","open"); 
+		$(".myImage").hide();
+		$("#w").hide(); 
+		$("#s").hide();
+		return;
+	 }
 	 bumper++; 
+	    $("#theImage"+(count-1)).hide(); 
+	document.getElementById("theImage"+(count-1)).volume=0.0; 
 	 func(); 
 	 return;
  }
  
  if(e.keyCode==83)
  {
-	 if(count!=0)
-	 {
-		 count--;
-		 bumper--; 
-		 
-		 var elements = document.getElementsByTagName("article");
-	
-	//console.log("Elements length : "+elements.length); 
-	
-	 
-	var className = elements[bumper].className;
-	
-	console.log("Current classname : "+className); 
-	//console.log("ClassName String length : "+className.length); 
-	
-	var issue = 0; 
-	console.log("Bumper before : "+bumper); 
-	console.log("Count : "+count); 
-	while(className.toString().substring(className.length-9,className.length) != "has_image")
-	{
-		bumper--;
-		className = elements[bumper].className;
-		
-		console.log("Current classname : "+className); 
-	    //console.log("ClassName String length : "+className.length); 
-		
-		issue=1; 
-		
-	}
-		 func(); 
+	    $("#theImage"+(count)).hide(); 
+	document.getElementById("theImage"+(count)).volume=0.0; 
+	 goBack();
+     func(); 
+	  return; 
 	 }
 	 
-	 return; 
+	
 	 
  }
  
  if(e.keyCode==27)
  {
+	 console.log("Here in escape."); 
 	 localStorage.setItem("in",0); 
 		
 		
 		$("#b").prop("value","open"); 
-		$(".myImage").remove();
+		$(".myImage").hide();
 		
 		$("#w").hide(); 
 		$("#s").hide(); 
@@ -297,12 +181,129 @@ $(document).keydown(function(e){
 	 
  }
  
- }
+  
  
 });
 
+function goBack()
+{
+	$("#theImage"+count).hide(); 
+	document.getElementById("theImage"+count).volume=0.0; 
+	if(count!=0)
+	 {
+		 count--;
+		 bumper--; 
+		 
+		 var elements = document.getElementsByTagName("article");
+ 
+	var className = elements[bumper].className;
+ 
+	var issue = 0; 
+ 
+	while(className.toString().substring(className.length-9,className.length) != "has_image")
+	{
+		bumper--;
+		className = elements[bumper].className;
+ 
+		issue=1; 
+		
+	}
+	}
+}
+
+function goForward()//just returns id and increments bumper
+{
+	var elements = document.getElementsByTagName("article");
+ 
+	 
+	var className = elements[bumper].className;
+ 
+	
+	var issue = 0; 
+ 
+	while(className.toString().substring(className.length-9,className.length) != "has_image")
+	{
+		bumper++;
+		className = elements[bumper].className;
+ 
+		
+		issue=1; 
+		
+	}
+ 
+    var id = elements[bumper].id;
+	
+	return id; 
+	
+	
+}
 
 
+
+function preLoad()
+{
+	
+	var thread = document.getElementsByClassName("post_file_filename")
+	t=thread.length;
+	var view = document.getElementById("imageView"); 
+	var post="";
+	for(i=0;i<thread.length;i++)
+	{
+		post=""; 
+	
+     if(i>1)
+	 {
+		 $("#theImage"+(i-1)).hide;
+		 document.getElementById("theImage"+(i-1)).volume=0.0; 
+		 console.log("Append."); 
+	 }
+ 
+ 
+	
+	  
+ 
+	 
+  
+		var string = thread[i].toString();
+ 
+		
+		if(string.substring(0,5) != "https")
+        {
+			string = "https"+string.substring(4,string.length);
+		}
+		var end = string.substring(string.length-4,string.length);
+ 
+ 	 
+		
+		
+	if(end!="webm")  
+	{
+ 
+	post += "<img id=\"theImage"+i+"\" class=\"myImage\" src=\""+string+"\" >";
+	//view.style.display="hidden"; 
+	}
+	else
+	{ 
+		post += "<video id=\"theImage"+i+"\" width=\"auto\" height=\"650\" class=\"myImage\" controls autoplay ><source src=\""+string+"\" type=\"video/webm\">";
+		
+		//document.getElementById("theImage"+i).volume = 0.0; 
+		//view.style.display="hidden";
+	 
+	}
+	
+	$("#imageView").after(post);  
+	
+	 console.log(i); 
+	 console.log("Post : "+post); 
+}
+
+ $("#theImage"+(thread.length-1)).hide;
+		 document.getElementById("theImage"+(thread.length-1)).volume=0.0; 
+
+ 
+
+	
+}
 
 
 
