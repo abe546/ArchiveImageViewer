@@ -4,11 +4,17 @@ var imagesArray = document.getElementsByClassName("fileThumb");
 var first; 
 var bumper=0; 
 var t;
+var urlArray=[]; 
+var ch=0; 
 
 	
-	var $input = $('<p><input type="button" value="Start" id="b" > &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp &nbsp  <input type="button" value="forward - press \'w\'" id="w" > &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp  &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp  &nbsp <input type="button" value="backward - press \'s\'" id="s" > </p>');
+	var $input = $('<p><input type="button" value="Start" id="b" >');
      $input.prependTo($("body"));
+	 $("#b").after("<img src=\"https://web.njit.edu/~ic56/archive/white.png\" class=\"whiteImage\" id=\"white\">");
 	 
+	 $input = $('<p><input type="button" value="Hide" id="h" >');
+     $input.prependTo($("body"));
+	 $("#h").after("<img src=\"https://web.njit.edu/~ic56/archive/white.png\" class=\"whiteImage2\" id=\"white2\">");
 	 
 	 $("#w").hide(); 
 		$("#s").hide(); 
@@ -19,11 +25,21 @@ var t;
 	 var image = document.getElementById("message"); 
 	 
 	 image.innerHTML +='<img src="https://web.njit.edu/~ic56/archive/w.png" class="next" id="w" >';
+	 $("#w").hide();
 	 
+	 image.innerHTML +='<img src="https://web.njit.edu/~ic56/archive/s.png" class="back" id="s" >';
+	 $("#s").hide();
+	 
+	 image.innerHTML +='<img src="https://web.njit.edu/~ic56/archive/d.png" class="download" id="d" >';
+	 $("#d").hide();
+	 
+	 image.innerHTML +='<img src="https://web.njit.edu/~ic56/archive/escape.png" class="exit" id="e">';
+	 $("#e").hide(); 
 	 
 	 console.log("Before pre load."); 
 preLoad(); 
 console.log("After pre load."); 
+console.log("urlArray length : "+urlArray.length); 
 $(".myImage").hide(); 
 	 
 	 $("#w").click(function()
@@ -31,7 +47,7 @@ $(".myImage").hide();
 		count++;
 	 if(count>=t)
 	 {count=0;
-		 $("#b").prop("value","open"); 
+		 $("#b").prop("value","Open"); 
 		$(".myImage").hide();
 		$("#w").hide(); 
 		$("#s").hide();
@@ -62,9 +78,11 @@ $(".myImage").hide();
 	{
 		  
 		localStorage.setItem("in",1); 
-		$("#b").prop("value","esc"); 
+		$("#b").prop("value","ESC."); 
 		$("#w").show();
 		$("#s").show(); 
+		$("#e").show(); 
+		$("#d").show(); 
 		func();
 	}
 	else if(localStorage.getItem("in") == 1)
@@ -72,11 +90,12 @@ $(".myImage").hide();
 		localStorage.setItem("in",0); 
 		
 		
-		$("#b").prop("value","open"); 
+		$("#b").prop("value","Open"); 
 		$(".myImage").hide();
 		$("#w").hide(); 
 		$("#s").hide(); 
-		
+		$("#e").hide(); 
+		$("#d").hide(); 
 		
 		
 		return;
@@ -84,11 +103,90 @@ $(".myImage").hide();
 	else if(localStorage.getItem("in") == 0)
 	{
 		localStorage.setItem("in",1); 
-		$("#b").prop("value","esc"); 
+		$("#b").prop("value","ESC."); 
 			$("#w").show();
-		$("#s").show(); 
+		$("#s").show();
+        $("#e").show(); 
+		$("#d").show(); 		
 		func();
 	} });
+	
+	 $("#e").click(function(){ 
+	 if(localStorage.getItem("in")=="null" || localStorage.getItem("in") == null )
+	{
+		  
+		localStorage.setItem("in",1); 
+		$("#b").prop("value","ESC."); 
+		$("#w").show();
+		$("#s").show(); 
+		$("#e").show(); 
+		$("#d").show(); 
+		func();
+	}
+	else if(localStorage.getItem("in") == 1)
+	{
+		localStorage.setItem("in",0); 
+		
+		
+		$("#b").prop("value","Open"); 
+		$(".myImage").hide();
+		$("#w").hide(); 
+		$("#s").hide(); 
+		$("#e").hide(); 
+		$("#d").hide(); 
+		
+		
+		return;
+	}
+	else if(localStorage.getItem("in") == 0)
+	{
+		localStorage.setItem("in",1); 
+		$("#b").prop("value","ESC."); 
+			$("#w").show();
+		$("#s").show();
+        $("#e").show(); 
+		$("#d").show(); 		
+		func();
+	} });
+	
+	$("#h").click(function(){
+		
+		if(ch%2==0)
+		{
+		$("#w").hide(); 
+		$("#s").hide(); 
+		$("#e").hide(); 
+		$("#d").hide();
+		
+		$("#h").prop("value","Show"); 
+		
+		ch++;
+		}
+		else
+		{
+	    $("#w").show();
+		$("#s").show(); 
+		$("#e").show(); 
+		$("#d").show(); 
+		
+		$("#h").prop("value","Hide"); 
+		
+		ch++; 
+			
+		}
+		
+	}
+	);
+		
+	
+	$("#d").click(function() {
+    
+     var link = document.createElement('a');
+                  link.href = urlArray[count];  // use realtive url 
+                  link.download = urlArray[count];
+                  document.body.appendChild(link);
+                  link.click();  
+});
 	
 	
 	
@@ -139,7 +237,7 @@ $(document).keydown(function(e){
 	 count++;
 	 if(count>=t)
 	 {count=0;
-		 $("#b").prop("value","open"); 
+		 $("#b").prop("value","Open"); 
 		$(".myImage").hide();
 		$("#w").hide(); 
 		$("#s").hide();
@@ -171,14 +269,27 @@ $(document).keydown(function(e){
 	 localStorage.setItem("in",0); 
 		
 		
-		$("#b").prop("value","open"); 
+		$("#b").prop("value","Open"); 
 		$(".myImage").hide();
 		
 		$("#w").hide(); 
 		$("#s").hide(); 
+		$("#e").hide(); 
+		$("#d").hide();
 		
 		return;
 	 
+ }
+ 
+ if(e.keyCode==68)
+ {
+	 //download
+	 
+	  var link = document.createElement('a');
+                  link.href = urlArray[count];  // use realtive url 
+                  link.download = urlArray[count];
+                  document.body.appendChild(link);
+                  link.click();  
  }
  
   
@@ -245,6 +356,7 @@ function preLoad()
 	
 	var thread = document.getElementsByClassName("post_file_filename")
 	t=thread.length;
+	console.log("Files length : "+t); 
 	var view = document.getElementById("imageView"); 
 	var post="";
 	for(i=0;i<thread.length;i++)
@@ -255,7 +367,7 @@ function preLoad()
 	 {
 		 $("#theImage"+(i-1)).hide;
 		 document.getElementById("theImage"+(i-1)).volume=0.0; 
-		 console.log("Append."); 
+		// console.log("Append."); 
 	 }
  
  
@@ -281,6 +393,7 @@ function preLoad()
  
 	post += "<img id=\"theImage"+i+"\" class=\"myImage\" src=\""+string+"\" >";
 	//view.style.display="hidden"; 
+	urlArray[i]=string; 
 	}
 	else
 	{ 
@@ -288,18 +401,19 @@ function preLoad()
 		
 		//document.getElementById("theImage"+i).volume = 0.0; 
 		//view.style.display="hidden";
+		urlArray[i]=string; 
 	 
 	}
 	
 	$("#imageView").after(post);  
 	
-	 console.log(i); 
-	 console.log("Post : "+post); 
-}
+	// console.log(i); 
+	// console.log("Post : "+post); 
+}//End of for loop
 
  $("#theImage"+(thread.length-1)).hide;
 		 document.getElementById("theImage"+(thread.length-1)).volume=0.0; 
-
+ 
  
 
 	

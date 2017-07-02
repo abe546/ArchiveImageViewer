@@ -2,13 +2,13 @@ div.imageView{
    
  
   width:      auto;
-  height:     650px; 
+  
   background : black;
   z-index:    10;
   top:        0; 
   left:       0; 
   position:   fixed; /*Fixed will keep the image "stablilized"*/
-  bottom : 20px;
+  bottom : 8.5%;
   outline: none;
   left : 28px;
 }
@@ -16,7 +16,7 @@ div.imageView{
 #b 
 {
 	position: fixed; 
-	z-index=-1; 
+	z-index: 20; 
 	 
 	background : none;
 	outline: black;
@@ -24,12 +24,23 @@ div.imageView{
 	 
 }
 
+#h
+{
+	position: fixed; 
+	z-index: 20; 
+	 
+	background : none;
+	outline: black;
+    left : 90%;
+	 
+}
+
 .myImage
 { width:      auto;
-  height:     650px; 
+  height:     87%; 
   max-width : auto;
-  max-height : 650px; 
-  bottom : 20px; 
+   
+  bottom : 8.5%; 
   position:   fixed;
 	background : black;
 	outline: none;
@@ -43,10 +54,69 @@ div.imageView{
 	position: fixed;
 	z-index : 15;
     
-	 top : 10%;
+	 top : 11%;
 	height : 80px;
 	width : 80px; 
 	left : 85%; 
 	background : none; 
 	 
+}
+
+#s
+{
+	position: fixed;
+	z-index : 15;
+    
+	 top : 23%;
+	height : 80px;
+	width : 80px; 
+	left : 85%; 
+	background : none; 
+	 
+}
+
+
+#d
+{
+	position: fixed;
+	z-index : 15;
+    
+	 top : 23%;
+	height : 80px;
+	width : 80px; 
+	left : 91%; 
+	background : none; 
+	 
+}
+
+#e
+{
+	position: fixed;
+	z-index : 15;
+    
+	 top : 23%;
+	height : 80px;
+	width : 80px; 
+	left : 79%; 
+	background : none; 
+	 
+}
+
+#white
+{
+	position : fixed; 
+	z-index : 19;
+	height : 22px; 
+	width : 44px; 
+	
+}
+
+#white2
+{
+	position : fixed; 
+	z-index : 19;
+	height : 22px; 
+	width : 44px; 
+	left : 90%;
+	
 }
