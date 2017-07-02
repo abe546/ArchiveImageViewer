@@ -6,18 +6,21 @@ var bumper=0;
 var t;
 var urlArray=[]; 
 var ch=0; 
+var imageID=[]; 
 
 	
 	var $input = $('<p><input type="button" value="Start" id="b" >');
      $input.prependTo($("body"));
 	 $("#b").after("<img src=\"https://web.njit.edu/~ic56/archive/white.png\" class=\"whiteImage\" id=\"white\">");
 	 
-	 $input = $('<p><input type="button" value="Hide" id="h" >');
+	 $input = $('<p><input type="button" value="Hide " id="h" >');
      $input.prependTo($("body"));
 	 $("#h").after("<img src=\"https://web.njit.edu/~ic56/archive/white.png\" class=\"whiteImage2\" id=\"white2\">");
 	 
 	 $("#w").hide(); 
 		$("#s").hide(); 
+		$("#h").hide(); 
+		$("#white2").hide(); 
 		
 		 $("#b").after("<div id=\"message\" ></div>"); 
 	 $("#message").after("<div id=\"imageView\" ></div>"); 
@@ -83,6 +86,8 @@ $(".myImage").hide();
 		$("#s").show(); 
 		$("#e").show(); 
 		$("#d").show(); 
+		$("#h").show(); 
+		$("#white2").show(); 
 		func();
 	}
 	else if(localStorage.getItem("in") == 1)
@@ -95,7 +100,9 @@ $(".myImage").hide();
 		$("#w").hide(); 
 		$("#s").hide(); 
 		$("#e").hide(); 
-		$("#d").hide(); 
+		$("#d").hide();
+		$("#h").hide(); 
+		$("#white2").hide();
 		
 		
 		return;
@@ -107,7 +114,9 @@ $(".myImage").hide();
 			$("#w").show();
 		$("#s").show();
         $("#e").show(); 
-		$("#d").show(); 		
+		$("#d").show(); 
+        $("#h").show();		
+		$("#white2").show(); 
 		func();
 	} });
 	
@@ -121,6 +130,8 @@ $(".myImage").hide();
 		$("#s").show(); 
 		$("#e").show(); 
 		$("#d").show(); 
+		$("#h").show(); 
+		$("#white2").show(); 
 		func();
 	}
 	else if(localStorage.getItem("in") == 1)
@@ -134,6 +145,8 @@ $(".myImage").hide();
 		$("#s").hide(); 
 		$("#e").hide(); 
 		$("#d").hide(); 
+		$("#white2").hide(); 
+		$("#h").hide(); 
 		
 		
 		return;
@@ -145,7 +158,9 @@ $(".myImage").hide();
 			$("#w").show();
 		$("#s").show();
         $("#e").show(); 
-		$("#d").show(); 		
+		$("#d").show(); 
+$("#white2").show(); 
+$("#h").show(); 		
 		func();
 	} });
 	
@@ -377,6 +392,8 @@ function preLoad()
 	 
   
 		var string = thread[i].toString();
+		
+	  
  
 		
 		if(string.substring(0,5) != "https")
@@ -414,6 +431,35 @@ function preLoad()
  $("#theImage"+(thread.length-1)).hide;
 		 document.getElementById("theImage"+(thread.length-1)).volume=0.0; 
  
+ 
+ //Now to get the ids of the image's 'article' tag 
+ var go =0; 
+ for(i=0;i<thread.length;i++)
+ {
+ var elements = document.getElementsByTagName("article");
+ 
+	 
+	var className = elements[go].className;
+ 
+	
+	
+ 
+	while(className.toString().substring(className.length-9,className.length) != "has_image")
+	{
+		go++;
+		className = elements[go].className;
+ 
+		
+		issue=1; 
+		
+	}
+ 
+    imageID[i] = elements[go].id;
+	
+ }
+ 
+ console.log("imageID.length : "+imageID.length); 
+ console.log("thread.length "+thread.length); 
  
 
 	

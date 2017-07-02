@@ -28,10 +28,12 @@ div.imageView{
 {
 	position: fixed; 
 	z-index: 20; 
-	 
+	 outline : none; 
+	 border : none; 
 	background : none;
 	outline: black;
-    left : 90%;
+    left : 92%;
+	top : 15%;
 	 
 }
 
@@ -117,6 +119,7 @@ div.imageView{
 	z-index : 19;
 	height : 22px; 
 	width : 44px; 
-	left : 90%;
+	left : 92%;
+	top : 15%; 
 	
 }
