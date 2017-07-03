@@ -7,7 +7,7 @@ var t;
 var urlArray=[]; 
 var ch=0; 
 var imageID=[]; 
-
+localStorage.setItem("ch","show");
 	
 	var $input = $('<p><input type="button" value="Start" class="buttons" id="b" >');
      $input.prependTo($("body"));
@@ -112,7 +112,7 @@ $(".myImage").hide();
 		$("#h").show(); 
 		$("#b").show(); 
 		$("#h").prop("value","Show"); 
-		
+		localStorage.setItem("ch","hide"); 
 		ch++;
 		}
 		else
@@ -122,7 +122,7 @@ $(".myImage").hide();
 		$("#h").show(); 
 		$("#b").show(); 
 		$("#h").prop("value","Hide"); 
-		
+		localStorage.setItem("ch","show"); 
 		ch++; 
 			
 		}
@@ -144,30 +144,38 @@ $(".myImage").hide();
   
 function func()
 { 
-//console.log("in Func"); 
-	var id = goForward(); 
+ console.log("in Func"); 
+ alert("HIN IG%JIKG$IJ."); 
+ 
+ 
+	var id = imageID[count]; 
  
 	var view = document.getElementById("theImage"+count); 
 	//console.log("theImage"+count); 
- 
+     console.log("The ID : "+id); 
 	window.location.hash = ("#"+id);
  
- view.style.display="block";
+ /*view.style.display="block";
 		view.volume = 0.2; 
 		view.autoplay = false;
-		view.autoplay = true;
+		view.autoplay = true;*/
  	
 }
 
 function func(id)
 {
-	var id = id;  
+	var id = id; 
+console.log("id : "+id); 
+if(id==undefined || id=="undefined")
+{
+	id= imageID[count]; 
+}	
  
 	var view = document.getElementById("theImage"+count); 
 	//console.log("theImage"+count); 
  
 	window.location.hash = ("#"+id);
- 
+ console.log("FUNC(ID)."); 
  view.style.display="block";
 		view.volume = 0.2; 
 		view.autoplay = false;
@@ -185,6 +193,7 @@ $(document).keydown(function(e){
  {
  if(e.keyCode==87)
  {
+	 console.log("In 87."); 
 	 count++;
 	 if(count>=t)
 	 {count=0;
@@ -201,6 +210,7 @@ $(document).keydown(function(e){
 	 bumper++; 
 	    $("#theImage"+(count-1)).hide(); 
 	document.getElementById("theImage"+(count-1)).volume=0.0; 
+	console.log("Calling func"); 
 	 func(); 
 	 return;
  }
@@ -209,7 +219,7 @@ $(document).keydown(function(e){
  {
 	    $("#theImage"+(count)).hide(); 
 	document.getElementById("theImage"+(count)).volume=0.0; 
-	 goBack();
+	 count--;  
      func(); 
 	  return; 
 	 }
@@ -407,12 +417,18 @@ function preLoad() //This function exists to add images to the page, hide them, 
 
 $(document).ready($(document.body).click(function(event)
 {
-	if(localStorage.getItem("in")==1)
-	{
+	 var className = event.target.className; 
+	 if(className == "text")
+	 {
+		 console.log("Got to class text."); 
+		 count=0; 
+		 func(); 
+		 
+	 }
 	console.log("Class : "+event.target.className);
 	console.log("ID : "+event.target.id); 
 	if(event.target.className!="buttons")
-	{
+	{console.log("Inside of it m8."); 
 		$(".myImage").hide(); 
 	open(); 
 	//var id = event.target.parentNode.parentNode.parentNode.parentNode.id;
@@ -425,7 +441,9 @@ $(document).ready($(document.body).click(function(event)
 	{//console.log("in for loop>"); 
      //console.log(imageID[i]);
 	 //console.log("id : "+id); 
-	 
+	    
+		
+		
 		if(imageID[i]==id)
 		{
 			 
@@ -435,9 +453,9 @@ $(document).ready($(document.body).click(function(event)
 		}
 	}
 	}
-	}
+	 
 	
-	return; 
+ 
 }
 )
 ); 
@@ -450,8 +468,8 @@ function open()
 		localStorage.setItem("in",1); 
 		$("#b").prop("value","ESC."); 
 		
-		if(ch%2==0)
-		{
+		if(localStorage.getItem("ch")=="show")
+		{			
 		$("#w").show();
 		$("#s").show(); 
 		$("#e").show(); 
@@ -475,7 +493,7 @@ function close()
 		$("#d").hide();
 		$("#h").hide(); 
 		$("#white2").hide();
-		ch=0; 
+ 
 		
 		return; 
 }
