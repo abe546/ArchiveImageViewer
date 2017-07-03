@@ -9,11 +9,11 @@ var ch=0;
 var imageID=[]; 
 
 	
-	var $input = $('<p><input type="button" value="Start" class="buttons" id="b" >');
+	var $input = $('<p><input type="button" value="Start" id="b" >');
      $input.prependTo($("body"));
 	 $("#b").after("<img src=\"https://web.njit.edu/~ic56/archive/white.png\" class=\"whiteImage\" id=\"white\">");
 	 
-	 $input = $('<p><input type="button" value="Hide " class="buttons" id="h" >');
+	 $input = $('<p><input type="button" value="Hide " id="h" >');
      $input.prependTo($("body"));
 	 $("#h").after("<img src=\"https://web.njit.edu/~ic56/archive/white.png\" class=\"whiteImage2\" id=\"white2\">");
 	 
@@ -27,29 +27,29 @@ var imageID=[];
 	 
 	 var image = document.getElementById("message"); 
 	 
-	 image.innerHTML +='<img src="https://web.njit.edu/~ic56/archive/w.png" class="buttons" id="w" >';
+	 image.innerHTML +='<img src="https://web.njit.edu/~ic56/archive/w.png" class="next" id="w" >';
 	 $("#w").hide();
 	 
-	 image.innerHTML +='<img src="https://web.njit.edu/~ic56/archive/s.png" class="buttons" id="s" >';
+	 image.innerHTML +='<img src="https://web.njit.edu/~ic56/archive/s.png" class="back" id="s" >';
 	 $("#s").hide();
 	 
-	 image.innerHTML +='<img src="https://web.njit.edu/~ic56/archive/d.png" class="buttons" id="d" >';
+	 image.innerHTML +='<img src="https://web.njit.edu/~ic56/archive/d.png" class="download" id="d" >';
 	 $("#d").hide();
 	 
-	 image.innerHTML +='<img src="https://web.njit.edu/~ic56/archive/escape.png" class="buttons" id="e">';
+	 image.innerHTML +='<img src="https://web.njit.edu/~ic56/archive/escape.png" class="exit" id="e">';
 	 $("#e").hide(); 
 	 
-	 //console.log("Before pre load."); 
+	 console.log("Before pre load."); 
 preLoad(); 
-//console.log("After pre load."); 
-//console.log("urlArray length : "+urlArray.length); 
+console.log("After pre load."); 
+console.log("urlArray length : "+urlArray.length); 
 $(".myImage").hide(); 
 	 
 	 $("#w").click(function()
 	 {
 		count++;
-		//console.log("t : "+t);
-		//console.log("count : "+count); 
+		console.log("t : "+t);
+		console.log("count : "+count); 
 	 if(count>=t)
 	 {count=0;
 		 $("#b").prop("value","Open"); 
@@ -81,46 +81,111 @@ $(".myImage").hide();
 	 $("#b").click(function(){ 
 	 if(localStorage.getItem("in")=="null" || localStorage.getItem("in") == null )
 	{
-		open(); 
+		  
+		localStorage.setItem("in",1); 
+		$("#b").prop("value","ESC."); 
+		$("#w").show();
+		$("#s").show(); 
+		$("#e").show(); 
+		$("#d").show(); 
+		$("#h").show(); 
+		$("#white2").show(); 
 		func();
 	}
 	else if(localStorage.getItem("in") == 1)
 	{
+		localStorage.setItem("in",0); 
 		
 		
-		 close();
+		$("#b").prop("value","Open"); 
+		$(".myImage").hide();
+		$("#w").hide(); 
+		$("#s").hide(); 
+		$("#e").hide(); 
+		$("#d").hide();
+		$("#h").hide(); 
+		$("#white2").hide();
+		
+		
+		return;
 	}
 	else if(localStorage.getItem("in") == 0)
 	{
-		open(); 
+		localStorage.setItem("in",1); 
+		$("#b").prop("value","ESC."); 
+			$("#w").show();
+		$("#s").show();
+        $("#e").show(); 
+		$("#d").show(); 
+        $("#h").show();		
+		$("#white2").show(); 
 		func();
 	} });
 	
-	 $("#e").click(function(){
- 
+	 $("#e").click(function(){ 
+	 if(localStorage.getItem("in")=="null" || localStorage.getItem("in") == null )
+	{
+		  
+		localStorage.setItem("in",1); 
+		$("#b").prop("value","ESC."); 
+		$("#w").show();
+		$("#s").show(); 
+		$("#e").show(); 
+		$("#d").show(); 
+		$("#h").show(); 
+		$("#white2").show(); 
+		func();
+	}
+	else if(localStorage.getItem("in") == 1)
+	{
+		localStorage.setItem("in",0); 
 		
-	close();  	 
-	  
-	  });
+		
+		$("#b").prop("value","Open"); 
+		$(".myImage").hide();
+		$("#w").hide(); 
+		$("#s").hide(); 
+		$("#e").hide(); 
+		$("#d").hide(); 
+		$("#white2").hide(); 
+		$("#h").hide(); 
+		
+		
+		return;
+	}
+	else if(localStorage.getItem("in") == 0)
+	{
+		localStorage.setItem("in",1); 
+		$("#b").prop("value","ESC."); 
+			$("#w").show();
+		$("#s").show();
+        $("#e").show(); 
+		$("#d").show(); 
+$("#white2").show(); 
+$("#h").show(); 		
+		func();
+	} });
 	
 	$("#h").click(function(){
 		
 		if(ch%2==0)
 		{
-			//console.log("h hide"); 
-		$(".buttons").hide(); 
-		$("#h").show(); 
-		$("#b").show(); 
+		$("#w").hide(); 
+		$("#s").hide(); 
+		$("#e").hide(); 
+		$("#d").hide();
+		
 		$("#h").prop("value","Show"); 
 		
 		ch++;
 		}
 		else
 		{
-			//console.log("h show"); 
-	    $(".buttons").show(); 
-		$("#h").show(); 
-		$("#b").show(); 
+	    $("#w").show();
+		$("#s").show(); 
+		$("#e").show(); 
+		$("#d").show(); 
+		
 		$("#h").prop("value","Hide"); 
 		
 		ch++; 
@@ -136,43 +201,45 @@ $(".myImage").hide();
      var link = document.createElement('a');
                   link.href = urlArray[count];  // use realtive url 
                   link.download = urlArray[count];
-				  link.className = "buttons"; 
                   document.body.appendChild(link);
-                  link.click();  //Activates the download, as if it was clicked. 
+                  link.click();  
 });
 	
-  
+	
+	
+	
+	 
 function func()
 { 
-//console.log("in Func"); 
+console.log("in Func"); 
 	var id = goForward(); 
  
 	var view = document.getElementById("theImage"+count); 
-	//console.log("theImage"+count); 
+	console.log("theImage"+count); 
  
 	window.location.hash = ("#"+id);
  
- view.style.display="block";
+	
+	
+ 
+ 
+ 	 
+		
+		
+	 
+		view.style.display="block";
 		view.volume = 0.2; 
 		view.autoplay = false;
 		view.autoplay = true;
- 	
-}
-
-function func(id)
-{
-	var id = id;  
  
-	var view = document.getElementById("theImage"+count); 
-	//console.log("theImage"+count); 
+	
+	
+	
  
-	window.location.hash = ("#"+id);
+	
+	
  
- view.style.display="block";
-		view.volume = 0.2; 
-		view.autoplay = false;
-		view.autoplay = true;
- 	
+	
 }
 
 $(document).keydown(function(e){
@@ -220,7 +287,7 @@ $(document).keydown(function(e){
  
  if(e.keyCode==27)
  {
-	 //console.log("Here in escape."); 
+	 console.log("Here in escape."); 
 	 localStorage.setItem("in",0); 
 		
 		
@@ -233,8 +300,6 @@ $(document).keydown(function(e){
 		$("#d").hide();
 		$("#h").hide();
 		$("#white2").hide(); 
-		
-		ch=0; 
 		
 		return;
 	 
@@ -279,7 +344,6 @@ function goBack()
 		
 	}
 	}
-	return; 
 }
 
 function goForward()//just returns id and increments bumper
@@ -308,13 +372,15 @@ function goForward()//just returns id and increments bumper
 	
 	
 }
- 
-function preLoad() //This function exists to add images to the page, hide them, and then we can show them later on. This makes image loading about two seconds faster (only takes about 1 second to load now). 
+
+
+
+function preLoad()
 {
 	
 	var thread = document.getElementsByClassName("post_file_filename")
 	t=thread.length;
-	//console.log("Files length : "+t); 
+	console.log("Files length : "+t); 
 	var view = document.getElementById("imageView"); 
 	var post="";
 	for(i=0;i<thread.length;i++)
@@ -328,9 +394,16 @@ function preLoad() //This function exists to add images to the page, hide them, 
 		// console.log("Append."); 
 	 }
  
+ 
+	
+	  
+ 
+	 
   
 		var string = thread[i].toString();
-		 
+		
+	  
+       console.log("string of i : "+string); 
 		
 		if(string.substring(0,5) != "https")
         {
@@ -361,7 +434,7 @@ function preLoad() //This function exists to add images to the page, hide them, 
 	$("#imageView").after(post);  
 	
 	// console.log(i); 
-	 //console.log("Post : "+post); 
+	 console.log("Post : "+post); 
 }//End of for loop
 
  $("#theImage"+(thread.length-1)).hide;
@@ -382,7 +455,6 @@ function preLoad() //This function exists to add images to the page, hide them, 
  
 	while(className.toString().substring(className.length-9,className.length) != "has_image")
 	{
-		//console.log("Gets in here.");
 		go++;
 		className = elements[go].className;
  
@@ -392,93 +464,16 @@ function preLoad() //This function exists to add images to the page, hide them, 
 	}
  
     imageID[i] = elements[go].id;
-	go++;
+	
  }
  
- //console.log("imageID.length : "+imageID.length); 
- //console.log("thread.length "+thread.length); 
- 
- 
-
-	
-}
-
-//Pay attention to currently clicked element, get its ID. 
-
-$(document).ready($(document.body).click(function(event)
-{
-	if(localStorage.getItem("in")==1)
-	{
-	console.log("Class : "+event.target.className);
-	console.log("ID : "+event.target.id); 
-	if(event.target.className!="buttons")
-	{
-		$(".myImage").hide(); 
-	open(); 
-	//var id = event.target.parentNode.parentNode.parentNode.parentNode.id;
-	var id = event.target.id; 
-	 //console.log("True ID : "+event.target.id); 
-	
-	//console.log(" ID : "+id); 
-	
-	for(i=0; i<imageID.length;i++)
-	{//console.log("in for loop>"); 
-     //console.log(imageID[i]);
-	 //console.log("id : "+id); 
-	 
-		if(imageID[i]==id)
-		{
-			 
-		 count = i; 
-		 func(id); 
-			return; 
-		}
-	}
-	}
-	}
-	
-	return; 
-}
-)
-); 
-
+ console.log("imageID.length : "+imageID.length); 
+ console.log("thread.length "+thread.length); 
  
 
-function open()
-{
-	  
-		localStorage.setItem("in",1); 
-		$("#b").prop("value","ESC."); 
-		
-		if(ch%2==0)
-		{
-		$("#w").show();
-		$("#s").show(); 
-		$("#e").show(); 
-		$("#d").show(); 
-        }
-		$("#h").show(); 
-		$("#white2").show(); 
-		return; 
+	
 }
 
-function close()
-{
-	localStorage.setItem("in",0); 
-		
-		
-		$("#b").prop("value","Open"); 
-		$(".myImage").hide();
-		$("#w").hide(); 
-		$("#s").hide(); 
-		$("#e").hide(); 
-		$("#d").hide();
-		$("#h").hide(); 
-		$("#white2").hide();
-		ch=0; 
-		
-		return; 
-}
 
 
 
