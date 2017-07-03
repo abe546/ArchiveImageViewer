@@ -40,6 +40,7 @@ div.imageView{
 .myImage
 { width:      auto;
   height:     87%; 
+  max-width : 77%;
   max-width : auto;
    
   bottom : 8.5%; 

@@ -48,6 +48,8 @@ $(".myImage").hide();
 	 $("#w").click(function()
 	 {
 		count++;
+		console.log("t : "+t);
+		console.log("count : "+count); 
 	 if(count>=t)
 	 {count=0;
 		 $("#b").prop("value","Open"); 
@@ -227,6 +229,7 @@ console.log("in Func");
 	 
 		view.style.display="block";
 		view.volume = 0.2; 
+		view.autoplay = false;
 		view.autoplay = true;
  
 	
@@ -256,6 +259,10 @@ $(document).keydown(function(e){
 		$(".myImage").hide();
 		$("#w").hide(); 
 		$("#s").hide();
+		$("#e").hide(); 
+		$("#white2").hide();
+		$("#h").hide();
+		$("#d").hide();
 		return;
 	 }
 	 bumper++; 
@@ -291,6 +298,8 @@ $(document).keydown(function(e){
 		$("#s").hide(); 
 		$("#e").hide(); 
 		$("#d").hide();
+		$("#h").hide();
+		$("#white2").hide(); 
 		
 		return;
 	 
@@ -394,7 +403,7 @@ function preLoad()
 		var string = thread[i].toString();
 		
 	  
- 
+       console.log("string of i : "+string); 
 		
 		if(string.substring(0,5) != "https")
         {
@@ -425,7 +434,7 @@ function preLoad()
 	$("#imageView").after(post);  
 	
 	// console.log(i); 
-	// console.log("Post : "+post); 
+	 console.log("Post : "+post); 
 }//End of for loop
 
  $("#theImage"+(thread.length-1)).hide;
