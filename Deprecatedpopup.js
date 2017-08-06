@@ -39,17 +39,17 @@ localStorage.setItem("ch","show");
 	 image.innerHTML +='<img src="https://web.njit.edu/~ic56/archive/escape.png" class="buttons" id="e">';
 	 $("#e").hide(); 
 	 
-	 //////console.log("Before pre load."); 
+	 //console.log("Before pre load."); 
 preLoad(); 
-//////console.log("After pre load."); 
-//////console.log("urlArray length : "+urlArray.length); 
+//console.log("After pre load."); 
+//console.log("urlArray length : "+urlArray.length); 
 $(".myImage").hide(); 
 	 
 	 $("#w").click(function()
 	 {
 		count++;
-		//////console.log("t : "+t);
-		//////console.log("count : "+count); 
+		//console.log("t : "+t);
+		//console.log("count : "+count); 
 	 if(count>=t)
 	 {count=0;
 		 $("#b").prop("value","Open"); 
@@ -58,12 +58,10 @@ $(".myImage").hide();
 		$("#s").hide();
 		return;
 	 }
-	 //Show newest image immediately, then hide previous one. 
 	 bumper++; 
-	 func(); 
 	    $("#theImage"+(count-1)).hide(); 
 	document.getElementById("theImage"+(count-1)).volume=0.0; 
-	 
+	 func(); 
 	 return; 
 		 
 	 }
@@ -71,13 +69,10 @@ $(".myImage").hide();
 	 
 	 $("#s").click(function()
 	 {
-		 
-		 //Show newest image immediately, then hide previous one. 
-	
 		$("#theImage"+(count)).hide(); 
 	document.getElementById("theImage"+(count)).volume=0.0; 
-	 	  count--;  
-     func();
+	 count--;  
+     func(); 
 	  return; //no longer need goBack
 	 
 	 }
@@ -113,7 +108,7 @@ $(".myImage").hide();
 		
 		if(ch%2==0)
 		{
-			//////console.log("h hide"); 
+			//console.log("h hide"); 
 		$(".buttons").hide(); 
 		$("#h").show(); 
 		$("#b").show(); 
@@ -123,7 +118,7 @@ $(".myImage").hide();
 		}
 		else
 		{
-			//////console.log("h show"); 
+			//console.log("h show"); 
 	    $(".buttons").show(); 
 		$("#h").show(); 
 		$("#b").show(); 
@@ -150,38 +145,38 @@ $(".myImage").hide();
   
 function func()
 { 
- ////console.log("in Func"); 
- //alert("HIN IG%JIKG$IJ."); 
+ console.log("in Func"); 
+ alert("HIN IG%JIKG$IJ."); 
  
  
 	var id = imageID[count]; 
  
 	var view = document.getElementById("theImage"+count); 
-	//////console.log("theImage"+count); 
-     ////console.log("The ID : "+id); 
+	//console.log("theImage"+count); 
+     console.log("The ID : "+id); 
 	window.location.hash = ("#"+id);
  
-       view.style.display="block";
+ /*view.style.display="block";
 		view.volume = 0.2; 
 		view.autoplay = false;
-		view.autoplay = true; 
+		view.autoplay = true;*/
  	
 }
 
 function func(id)
 {
 	var id = id; 
-////console.log("id : "+id); 
+console.log("id : "+id); 
 if(id==undefined || id=="undefined")
 {
 	id= imageID[count]; 
 }	
  
 	var view = document.getElementById("theImage"+count); 
-	//////console.log("theImage"+count); 
+	//console.log("theImage"+count); 
  
 	window.location.hash = ("#"+id);
- ////console.log("FUNC(ID)."); 
+ console.log("FUNC(ID)."); 
  view.style.display="block";
 		view.volume = 0.2; 
 		view.autoplay = false;
@@ -191,15 +186,15 @@ if(id==undefined || id=="undefined")
 
 $(document).keydown(function(e){
 	
-  ////console.log(e.keyCode); 
+  console.log(e.keyCode); 
  
  //w== 87
  //s== 83
  if(localStorage.getItem("in")==1)
  {
- if(e.keyCode==87) //w
+ if(e.keyCode==87)
  {
-	 ////console.log("In 87."); 
+	 console.log("In 87."); 
 	 count++;
 	 if(count>=t)
 	 {count=0;
@@ -214,23 +209,19 @@ $(document).keydown(function(e){
 		return;
 	 }
 	 bumper++; 
-	 
-	 func(); 
 	    $("#theImage"+(count-1)).hide(); 
 	document.getElementById("theImage"+(count-1)).volume=0.0; 
-	////console.log("Calling func"); 
-	 
+	console.log("Calling func"); 
+	 func(); 
 	 return;
  }
  
- if(e.keyCode==83) //s
+ if(e.keyCode==83)
  {
-	  
 	    $("#theImage"+(count)).hide(); 
 	document.getElementById("theImage"+(count)).volume=0.0; 
-	count--;  
-	 func();
-      
+	 count--;  
+     func(); 
 	  return; 
 	 }
 	 
@@ -238,9 +229,9 @@ $(document).keydown(function(e){
 	 
  }
  
- if(e.keyCode==27) //esc
+ if(e.keyCode==27)
  {
-	 //////console.log("Here in escape."); 
+	 //console.log("Here in escape."); 
 	 localStorage.setItem("in",0); 
 		
 		
@@ -260,32 +251,81 @@ $(document).keydown(function(e){
 	 
  }
  
- if(e.keyCode==68) //d
+ if(e.keyCode==68)
  {
 	 //download
 	 
 	  var link = document.createElement('a');
                   link.href = urlArray[count];  // use realtive url 
                   link.download = urlArray[count];
-				  link.className = "buttons"; 
                   document.body.appendChild(link);
-                  link.click();  //Activates the download, as if it was clicked.  
+                  link.click();  
  }
  
   
  
 });
 
+function goBack()
+{
+	$("#theImage"+count).hide(); 
+	document.getElementById("theImage"+count).volume=0.0; 
+	if(count!=0)
+	 {
+		 count--;
+		 bumper--; 
+		 
+		 var elements = document.getElementsByTagName("article");
  
+	var className = elements[bumper].className;
+ 
+	var issue = 0; 
+ 
+	while(className.toString().substring(className.length-9,className.length) != "has_image")
+	{
+		bumper--;
+		className = elements[bumper].className;
+ 
+		issue=1; 
+		
+	}
+	}
+	return; 
+}
 
+function goForward()//just returns id and increments bumper
+{
+	var elements = document.getElementsByTagName("article");
  
+	 
+	var className = elements[bumper].className;
+ 
+	
+	var issue = 0; 
+ 
+	while(className.toString().substring(className.length-9,className.length) != "has_image")
+	{
+		bumper++;
+		className = elements[bumper].className;
+ 
+		
+		issue=1; 
+		
+	}
+ 
+    var id = elements[bumper].id;
+	
+	return id; 
+	
+	
+}
  
 function preLoad() //This function exists to add images to the page, hide them, and then we can show them later on. This makes image loading about two seconds faster (only takes about 1 second to load now). 
 {
 	
 	var thread = document.getElementsByClassName("post_file_filename")
 	t=thread.length;
-	//////console.log("Files length : "+t); 
+	//console.log("Files length : "+t); 
 	var view = document.getElementById("imageView"); 
 	var post="";
 	for(i=0;i<thread.length;i++)
@@ -296,7 +336,7 @@ function preLoad() //This function exists to add images to the page, hide them, 
 	 {
 		 $("#theImage"+(i-1)).hide;
 		 document.getElementById("theImage"+(i-1)).volume=0.0; 
-		// ////console.log("Append."); 
+		// console.log("Append."); 
 	 }
  
   
@@ -331,8 +371,8 @@ function preLoad() //This function exists to add images to the page, hide them, 
 	
 	$("#imageView").after(post);  
 	
-	// ////console.log(i); 
-	 //////console.log("Post : "+post); 
+	// console.log(i); 
+	 //console.log("Post : "+post); 
 }//End of for loop
 
  $("#theImage"+(thread.length-1)).hide;
@@ -353,7 +393,7 @@ function preLoad() //This function exists to add images to the page, hide them, 
  
 	while(className.toString().substring(className.length-9,className.length) != "has_image")
 	{
-		//////console.log("Gets in here.");
+		//console.log("Gets in here.");
 		go++;
 		className = elements[go].className;
  
@@ -366,8 +406,8 @@ function preLoad() //This function exists to add images to the page, hide them, 
 	go++;
  }
  
- //////console.log("imageID.length : "+imageID.length); 
- //////console.log("thread.length "+thread.length); 
+ //console.log("imageID.length : "+imageID.length); 
+ //console.log("thread.length "+thread.length); 
  
  
 
@@ -381,27 +421,27 @@ $(document).ready($(document.body).click(function(event)
 	 var className = event.target.className; 
 	 if(className == "text")
 	 {
-		 ////console.log("Got to class text."); 
+		 console.log("Got to class text."); 
 		 count=0; 
 		 func(); 
 		 
 	 }
-	////console.log("Class : "+event.target.className);
-	////console.log("ID : "+event.target.id); 
+	console.log("Class : "+event.target.className);
+	console.log("ID : "+event.target.id); 
 	if(event.target.className!="buttons")
-	{////console.log("Inside of it m8."); 
+	{console.log("Inside of it m8."); 
 		$(".myImage").hide(); 
 	open(); 
 	//var id = event.target.parentNode.parentNode.parentNode.parentNode.id;
 	var id = event.target.id; 
-	 //////console.log("True ID : "+event.target.id); 
+	 //console.log("True ID : "+event.target.id); 
 	
-	//////console.log(" ID : "+id); 
+	//console.log(" ID : "+id); 
 	
 	for(i=0; i<imageID.length;i++)
-	{//////console.log("in for loop>"); 
-     //////console.log(imageID[i]);
-	 //////console.log("id : "+id); 
+	{//console.log("in for loop>"); 
+     //console.log(imageID[i]);
+	 //console.log("id : "+id); 
 	    
 		
 		
