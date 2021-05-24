@@ -7,7 +7,9 @@ var t;
 var urlArray=[];
 var ch=0;
 var imageID=[];
+var imagePrefix="http://www.thebarchive.com/data/b/image/";
 localStorage.setItem("ch","show");
+
 
 	var $input = $('<p><input type="button" value="Start" class="buttons" id="b" >');
      $input.prependTo($("body"));
@@ -283,7 +285,8 @@ $(document).keydown(function(e){
 function preLoad() //This function exists to add images to the page, hide them, and then we can show them later on. This makes image loading about two seconds faster (only takes about 1 second to load now).
 {
 
-	var thread = document.getElementsByClassName("post_file_filename")
+	var thread = document.getElementsByClassName("post_image")
+	var directImage = document.getElementsByClassName("post_file_filename");
 	t=thread.length;
 	//////console.log("Files length : "+t);
 	var view = document.getElementById("imageView");
@@ -299,18 +302,21 @@ function preLoad() //This function exists to add images to the page, hide them, 
 		// ////console.log("Append.");
 	 }
 
+    //Of the form : "https://archived.moe/files/b/thumb/1445/76/1445764981862s.jpg"
+		var string = thread[i].src.toString();
+console.log("STRING ENTRY FIRST : "+string);
+		var beginIndex = string.lastIndexOf("thumb/") + 6;
+		var endIndex = string.lastIndexOf("\.") - 1;
 
-		var string = thread[i].toString();
+		//Of the form : "1445/76/1445764981862"
+    string = string.substring(beginIndex, endIndex);
+console.log("DIRECT IMAGE : "+directImage[i].toString());
+	 var endIndex = directImage[i].toString().lastIndexOf("\.");
+   var end = directImage[i].toString().substring(endIndex);
 
-
-		if(string.substring(0,5) != "https")
-        {
-			string = "https"+string.substring(4,string.length);
-		}
-		var end = string.substring(string.length-4,string.length);
-
-
-
+	 //Final constructed URL of the form : https://www.thebarchive.com/data/b/image/1445/76/1445764981862.png
+	 string = imagePrefix + string + end;
+		console.log("STRING ENTRY END : "+string);
 
 	if(end!="webm")
 	{
@@ -330,7 +336,6 @@ function preLoad() //This function exists to add images to the page, hide them, 
 	}
 
 	$("#imageView").after(post);
-
 	// ////console.log(i);
 	 //////console.log("Post : "+post);
 }//End of for loop
