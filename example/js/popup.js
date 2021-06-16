@@ -149,6 +149,7 @@ $(".myImage").hide();
 			tempSrc = document.getElementById("theVideo"+(count)).outerHTML;
 			document.getElementById("theVideo"+(count)).remove();
 			document.getElementById("theImage"+(count)).innerHTML = tempSrc;
+			document.getElementById("theImage"+(count)).play();
 		}else{
 		tempSrc = document.getElementById("theImage"+(count)).src;
 		document.getElementById("theImage"+(count)).src = "word";
@@ -174,6 +175,7 @@ function func()
 		view.volume = 0.2;
 		view.autoplay = false;
 		view.autoplay = true;
+		document.getElementById("theImage"+(count)).play();
 
 }
 
@@ -278,6 +280,7 @@ $(document).keydown(function(e){
 		tempSrc = document.getElementById("theVideo"+(count)).outerHTML;
 		document.getElementById("theVideo"+(count)).remove();
 		document.getElementById("theImage"+(count)).innerHTML = tempSrc;
+		document.getElementById("theImage"+(count)).play();
  	}else{
  	tempSrc = document.getElementById("theImage"+(count)).src;
  	document.getElementById("theImage"+(count)).src = "word";
