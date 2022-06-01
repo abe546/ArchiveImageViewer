@@ -25,6 +25,10 @@ localStorage.setItem("ch","show");
 		 $("#b").after("<div id=\"message\" ></div>");
 	 $("#message").after("<div id=\"imageView\" ></div>");
 
+	 setTimeout(function(){
+	     console.log("Wait for images to load");
+	 },4000);
+
 	 var image = document.getElementById("message");
 
 	 image.innerHTML +='<img src="https://i.imgur.com/rmF0e71.png" class="buttons" id="w" >';
@@ -139,12 +143,18 @@ $(".myImage").hide();
 
 	$("#d").click(function() {
 
-     var link = document.createElement('a');
-                  link.href = urlArray[count];  // use realtive url
-                  link.download = urlArray[count];
-				  link.className = "buttons";
-                  document.body.appendChild(link);
-                  link.click();  //Activates the download, as if it was clicked.
+		var tempSrc = "";
+
+		if(document.getElementById("theVideo"+(count))){
+			tempSrc = document.getElementById("theVideo"+(count)).outerHTML;
+			document.getElementById("theVideo"+(count)).remove();
+			document.getElementById("theImage"+(count)).innerHTML = tempSrc;
+			document.getElementById("theImage"+(count)).play();
+		}else{
+		tempSrc = document.getElementById("theImage"+(count)).src;
+		document.getElementById("theImage"+(count)).src = "word";
+		document.getElementById("theImage"+(count)).src = tempSrc;
+	}
 });
 
 
@@ -165,6 +175,7 @@ function func()
 		view.volume = 0.2;
 		view.autoplay = false;
 		view.autoplay = true;
+		document.getElementById("theImage"+(count)).play();
 
 }
 
@@ -181,12 +192,13 @@ if(id==undefined || id=="undefined")
 	//////console.log("theImage"+count);
 
 	window.location.hash = ("#"+id);
+if(view){
  ////console.log("FUNC(ID).");
  view.style.display="block";
 		view.volume = 0.2;
 		view.autoplay = false;
 		view.autoplay = true;
-
+}
 }
 
 $(document).keydown(function(e){
@@ -261,15 +273,19 @@ $(document).keydown(function(e){
  }
 
  if(e.keyCode==68) //d
- {
-	 //download
+ {//Refresh
+	 var tempSrc = "";
 
-	  var link = document.createElement('a');
-                  link.href = urlArray[count];  // use realtive url
-                  link.download = urlArray[count];
-				  link.className = "buttons";
-                  document.body.appendChild(link);
-                  link.click();  //Activates the download, as if it was clicked.
+ 	if(document.getElementById("theVideo"+(count))){
+		tempSrc = document.getElementById("theVideo"+(count)).outerHTML;
+		document.getElementById("theVideo"+(count)).remove();
+		document.getElementById("theImage"+(count)).innerHTML = tempSrc;
+		document.getElementById("theImage"+(count)).play();
+ 	}else{
+ 	tempSrc = document.getElementById("theImage"+(count)).src;
+ 	document.getElementById("theImage"+(count)).src = "word";
+ 	document.getElementById("theImage"+(count)).src = tempSrc;
+ }
  }
 
 
@@ -279,9 +295,20 @@ $(document).keydown(function(e){
 
 
 
-
+//Also used to redirect then do the following :
 function preLoad() //This function exists to add images to the page, hide them, and then we can show them later on. This makes image loading about two seconds faster (only takes about 1 second to load now).
 {
+
+	var getUrl = window.location;
+  var reRoute = "https://thebarchive.com";
+
+	console.log("HOST " + getUrl.host);
+	console.log("PATH : "+getUrl.pathname);
+
+	if(getUrl.host == "archived.moe")
+	{
+		window.location.href = reRoute+getUrl.pathname;
+	}
 
 	var thread = document.getElementsByClassName("post_file_filename")
 	t=thread.length;
@@ -321,7 +348,7 @@ function preLoad() //This function exists to add images to the page, hide them, 
 	}
 	else
 	{
-		post += "<video id=\"theImage"+i+"\" width=\"auto\" height=\"650\" class=\"myImage\" controls autoplay ><source src=\""+string+"\" type=\"video/webm\">";
+		post += "<video id=\"theImage"+i+"\" width=\"auto\" height=\"650\" class=\"myImage\" controls autoplay ><source id=\"theVideo"+i+"\" src=\""+string+"\" type=\"video/webm\">";
 
 		//document.getElementById("theImage"+i).volume = 0.0;
 		//view.style.display="hidden";
