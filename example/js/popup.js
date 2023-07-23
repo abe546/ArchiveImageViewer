@@ -37,7 +37,7 @@ localStorage.setItem("ch","show");
 	 image.innerHTML +='<img src="https://i.imgur.com/tu6zRLk.png" class="buttons" id="s" >';
 	 $("#s").hide();
 
-	 image.innerHTML +='<img src="https://i.imgur.com/4e2uvdR.png" class="buttons" id="d" >';
+	 image.innerHTML +='<img src="https://i.imgur.com/Tu76mjc.png" class="buttons" id="d" >';
 	 $("#d").hide();
 
 	 image.innerHTML +='<img src="https://i.imgur.com/1oKn0Xp.png" class="buttons" id="e">';
@@ -332,9 +332,9 @@ function preLoad() //This function exists to add images to the page, hide them, 
 
 		if(string.substring(0,5) != "https")
         {
-			string = "https"+string.substring(4,string.length);
+			string = "https"+string.substring(4,string.length+1);
 		}
-		var end = string.substring(string.length-4,string.length);
+		var end = string.substring(string.length-4,string.length+1);
 
 
 
