@@ -1,11 +1,8 @@
 {
-  "manifest_version": 2,
+  "manifest_version": 3,
   "name": "4chan Archive Image Viewer",
-  "version" : "0.0.1",
+  "version" : "1.0.1",
   "description" : "Quickly show images from page, they're overlayed on current page and eliminate the need to open 8 million images in a new tab.",
-  "browser_action" :
-  {"default_icon":"icon.png"
-  },
 
   "content_scripts": [
       {
