@@ -9,6 +9,8 @@ var ch=0;
 var imageID=[];
 localStorage.setItem("ch","show");
 
+console.log("CONSOLE 1");
+
 	var $input = $('<p><input type="button" value="Start" class="buttons" id="b" >');
      $input.prependTo($("body"));
 	 $("#b").after("<img src=\"https://i.imgur.com/RusCo13.png\" class=\"whiteImage\" id=\"white\">");
@@ -28,6 +30,8 @@ localStorage.setItem("ch","show");
 	 setTimeout(function(){
 	     console.log("Wait for images to load");
 	 },4000);
+
+console.log("CONSOLE 2");
 
 	 var image = document.getElementById("message");
 
@@ -298,7 +302,7 @@ $(document).keydown(function(e){
 //Also used to redirect then do the following :
 function preLoad() //This function exists to add images to the page, hide them, and then we can show them later on. This makes image loading about two seconds faster (only takes about 1 second to load now).
 {
-
+console.log("PRE LOAD");
 	var getUrl = window.location;
   var reRoute = "https://thebarchive.com";
 
