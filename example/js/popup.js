@@ -72,6 +72,11 @@ $(".myImage").hide();
 	    $("#theImage"+(count-1)).hide();
 	document.getElementById("theImage"+(count-1)).volume=0.0;
 
+	var delayInMilliseconds = 500; //1 second
+
+setTimeout(function() {
+ refreshAction();
+}, delayInMilliseconds);
 	 return;
 
 	 }
@@ -145,7 +150,9 @@ $(".myImage").hide();
 	);
 
 
-	$("#d").click(function() {
+
+
+	function refreshAction() {
 
 		var tempSrc = "";
 
@@ -159,7 +166,9 @@ $(".myImage").hide();
 		document.getElementById("theImage"+(count)).src = "word";
 		document.getElementById("theImage"+(count)).src = tempSrc;
 	}
-});
+}
+
+	$("#d").click(refreshAction());
 
 
 function func()
@@ -235,7 +244,7 @@ $(document).keydown(function(e){
 	    $("#theImage"+(count-1)).hide();
 	document.getElementById("theImage"+(count-1)).volume=0.0;
 	////console.log("Calling func");
-
+refreshAction();
 	 return;
  }
 
@@ -278,18 +287,7 @@ $(document).keydown(function(e){
 
  if(e.keyCode==68) //d
  {//Refresh
-	 var tempSrc = "";
-
- 	if(document.getElementById("theVideo"+(count))){
-		tempSrc = document.getElementById("theVideo"+(count)).outerHTML;
-		document.getElementById("theVideo"+(count)).remove();
-		document.getElementById("theImage"+(count)).innerHTML = tempSrc;
-		document.getElementById("theImage"+(count)).play();
- 	}else{
- 	tempSrc = document.getElementById("theImage"+(count)).src;
- 	document.getElementById("theImage"+(count)).src = "word";
- 	document.getElementById("theImage"+(count)).src = tempSrc;
- }
+	 refreshAction();
  }
 
 
