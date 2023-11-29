@@ -153,7 +153,7 @@ setTimeout(function() {
 
 
 	function refreshAction() {
-console.log("Refresh");
+//console.log("Refresh");
 		var tempSrc = "";
 
 		if(document.getElementById("theVideo"+(count))){
