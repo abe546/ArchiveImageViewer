@@ -9,7 +9,7 @@ var ch=0;
 var imageID=[];
 localStorage.setItem("ch","show");
 
-console.log("CONSOLE 1");
+//console.log("CONSOLE 1");
 
 	var $input = $('<p><input type="button" value="Start" class="buttons" id="b" >');
      $input.prependTo($("body"));
@@ -28,10 +28,10 @@ console.log("CONSOLE 1");
 	 $("#message").after("<div id=\"imageView\" ></div>");
 
 	 setTimeout(function(){
-	     console.log("Wait for images to load");
+	     //console.log("Wait for images to load");
 	 },4000);
 
-console.log("CONSOLE 2");
+//console.log("CONSOLE 2");
 
 	 var image = document.getElementById("message");
 
@@ -300,12 +300,12 @@ refreshAction();
 //Also used to redirect then do the following :
 function preLoad() //This function exists to add images to the page, hide them, and then we can show them later on. This makes image loading about two seconds faster (only takes about 1 second to load now).
 {
-console.log("PRE LOAD");
+//console.log("PRE LOAD");
 	var getUrl = window.location;
   var reRoute = "https://thebarchive.com";
 
-	console.log("HOST " + getUrl.host);
-	console.log("PATH : "+getUrl.pathname);
+//console.log("HOST " + getUrl.host);
+	//console.log("PATH : "+getUrl.pathname);
 
 	if(getUrl.host == "archived.moe")
 	{
