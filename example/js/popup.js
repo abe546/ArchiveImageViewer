@@ -153,7 +153,7 @@ setTimeout(function() {
 
 
 	function refreshAction() {
-
+console.log("Refresh");
 		var tempSrc = "";
 
 		if(document.getElementById("theVideo"+(count))){
@@ -168,7 +168,9 @@ setTimeout(function() {
 	}
 }
 
-	$("#d").click(refreshAction());
+	$("#d").click(function()
+	 {refreshAction();
+	 });
 
 
 function func()
