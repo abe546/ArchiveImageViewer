@@ -9,6 +9,8 @@ var ch=0;
 var imageID=[];
 localStorage.setItem("ch","show");
 
+//console.log("CONSOLE 1");
+
 	var $input = $('<p><input type="button" value="Start" class="buttons" id="b" >');
      $input.prependTo($("body"));
 	 $("#b").after("<img src=\"https://i.imgur.com/RusCo13.png\" class=\"whiteImage\" id=\"white\">");
@@ -26,8 +28,10 @@ localStorage.setItem("ch","show");
 	 $("#message").after("<div id=\"imageView\" ></div>");
 
 	 setTimeout(function(){
-	     console.log("Wait for images to load");
+	     //console.log("Wait for images to load");
 	 },4000);
+
+//console.log("CONSOLE 2");
 
 	 var image = document.getElementById("message");
 
@@ -68,6 +72,11 @@ $(".myImage").hide();
 	    $("#theImage"+(count-1)).hide();
 	document.getElementById("theImage"+(count-1)).volume=0.0;
 
+	var delayInMilliseconds = 500; //1 second
+
+setTimeout(function() {
+ refreshAction();
+}, delayInMilliseconds);
 	 return;
 
 	 }
@@ -141,7 +150,9 @@ $(".myImage").hide();
 	);
 
 
-	$("#d").click(function() {
+
+
+	function refreshAction() {
 
 		var tempSrc = "";
 
@@ -155,7 +166,9 @@ $(".myImage").hide();
 		document.getElementById("theImage"+(count)).src = "word";
 		document.getElementById("theImage"+(count)).src = tempSrc;
 	}
-});
+}
+
+	$("#d").click(refreshAction());
 
 
 function func()
@@ -231,7 +244,7 @@ $(document).keydown(function(e){
 	    $("#theImage"+(count-1)).hide();
 	document.getElementById("theImage"+(count-1)).volume=0.0;
 	////console.log("Calling func");
-
+refreshAction();
 	 return;
  }
 
@@ -274,18 +287,7 @@ $(document).keydown(function(e){
 
  if(e.keyCode==68) //d
  {//Refresh
-	 var tempSrc = "";
-
- 	if(document.getElementById("theVideo"+(count))){
-		tempSrc = document.getElementById("theVideo"+(count)).outerHTML;
-		document.getElementById("theVideo"+(count)).remove();
-		document.getElementById("theImage"+(count)).innerHTML = tempSrc;
-		document.getElementById("theImage"+(count)).play();
- 	}else{
- 	tempSrc = document.getElementById("theImage"+(count)).src;
- 	document.getElementById("theImage"+(count)).src = "word";
- 	document.getElementById("theImage"+(count)).src = tempSrc;
- }
+	 refreshAction();
  }
 
 
@@ -298,12 +300,12 @@ $(document).keydown(function(e){
 //Also used to redirect then do the following :
 function preLoad() //This function exists to add images to the page, hide them, and then we can show them later on. This makes image loading about two seconds faster (only takes about 1 second to load now).
 {
-
+//console.log("PRE LOAD");
 	var getUrl = window.location;
   var reRoute = "https://thebarchive.com";
 
-	console.log("HOST " + getUrl.host);
-	console.log("PATH : "+getUrl.pathname);
+//console.log("HOST " + getUrl.host);
+	//console.log("PATH : "+getUrl.pathname);
 
 	if(getUrl.host == "archived.moe")
 	{
